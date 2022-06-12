@@ -10,7 +10,7 @@ interface ShowLessonContract {
 
         fun getLessonComplete()
 
-        fun goToShowTeacherActivity(data:ShowLessonResponse)
+        fun goToShowClassRoomActivity(data:ShowLessonResponse)
     }
     interface Presenter{
         fun getLessonList(account:String)

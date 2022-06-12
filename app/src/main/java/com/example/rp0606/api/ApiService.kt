@@ -3,6 +3,7 @@ package com.example.rp0606.api
 import com.example.rp0606.login.UserLoginData
 import com.example.rp0606.chooseLesson.ChooseLessonRequest
 import com.example.rp0606.chooseLesson.ChooseLessonResponse
+import com.example.rp0606.showClassRoom.ShowClassRoomResponse
 import com.example.rp0606.showLesson.ShowLessonResponse
 import com.example.rp0606.showOffice.ShowOfficeResponse
 import com.example.rp0606.showTeacher.ShowTeacherResponse
@@ -43,5 +44,8 @@ interface ApiService {
     @GET("/api/belong/get")
     fun getOfficeByTeacher(@Query("teacherName") teacherName:String) :Observable<ShowOfficeResponse>
 
+    //取得課程教室資訊
+    @GET("/api/TeachOn/getClassRoomByLesson")
+    fun getClassRoomByLesson(@Query("lessonName") lessonName:String) :Observable<ShowClassRoomResponse>
 
 }

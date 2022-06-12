@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rp0606.BaseActivity
@@ -32,11 +33,19 @@ class ChooseLessonActivity : BaseActivity(),ChooseLessonContract.View {
         recyclerView.apply {
             adapter = myAdapter
             layoutManager = LinearLayoutManager(context)
+            addItemDecoration(DividerItemDecoration
+                (context,LinearLayoutManager.VERTICAL))
         }
 
 
         chooseLesson_btn.setOnClickListener(View.OnClickListener {
-            presenter.chooseLesson(myAdapter.getChooseLesson())
+            if(myAdapter.getChooseLesson().size > 0){
+                presenter.chooseLesson(myAdapter.getChooseLesson())
+                chooseLessonComplete()
+                backToShowLessonActivity()
+            }else{
+                showToast(this,"請選擇至少一堂課程")
+            }
         })
 
         filter_btn.setOnClickListener(View.OnClickListener {

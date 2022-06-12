@@ -41,7 +41,7 @@ class ShowLessonAdapter (val view:ShowLessonActivity): RecyclerView.Adapter<Show
             lessonCredit.text = data.get(position).lessonCredit.toString()
             lessonStatus.text = data.get(position).lessonStatus
             detail_btn.setOnClickListener(View.OnClickListener {
-                view.goToShowTeacherActivity(data.get(position))
+                view.goToShowClassRoomActivity(data.get(position))
             })
         }
     }

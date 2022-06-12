@@ -75,7 +75,6 @@ class ChooseLessonPresenter(val view: ChooseLessonContract.View) : ChooseLessonC
     }
 
     override fun chooseLesson(datas: ArrayList<ChooseLessonRequest>) {
-        Log.e("ChooseLessonPresenter", "chooseLesson: data "+datas.get(0).lesson_id )
         Observable.fromIterable(datas).subscribe {
             Log.e("ChooseLessonPresenter",
                 "chooseLesson: subscribe lesson_id: ${it.lesson_id} + account: ${it.user_name}")

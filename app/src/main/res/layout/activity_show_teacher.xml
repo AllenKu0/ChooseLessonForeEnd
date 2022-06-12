@@ -44,7 +44,12 @@
             android:gravity="center_vertical|center"
             android:text="辦公室資訊" />
     </LinearLayout>
-
+    <View
+        android:id="@+id/view_black"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toTopOf="@+id/guideline31" />
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar3"
         android:layout_width="0dp"
@@ -85,7 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline23"
-        app:layout_constraintTop_toTopOf="@+id/guideline31"
+        app:layout_constraintTop_toTopOf="@+id/view_black"
         tools:layout_editor_absoluteX="0dp" />
 
     <androidx.constraintlayout.widget.Guideline

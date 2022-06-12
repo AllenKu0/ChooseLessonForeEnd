@@ -6,14 +6,17 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rp0606.*
 import com.example.rp0606.chooseLesson.ChooseLessonActivity
+import com.example.rp0606.showClassRoom.ShowClassRoomActivity
 import com.example.rp0606.showTeacher.ShowTeacherActivity
 
 class ShowLessonActivity : BaseActivity(),ShowLessonContract.View {
     lateinit var choose_btn:Button
+    lateinit var deleteSelectLesson_btn:Button
     lateinit var recycler_view: RecyclerView
     val context:Context =this
     lateinit var presenter: ShowLessonContract.Presenter
@@ -28,6 +31,7 @@ class ShowLessonActivity : BaseActivity(),ShowLessonContract.View {
 
 //        Log.e("ShowLessonActivity", "onCreate account: $account")
         choose_btn = findViewById(R.id.to_choose_lesson_btn)
+        deleteSelectLesson_btn = findViewById(R.id.deleteSelectLesson_btn)
         presenter = ShowLessonPresenter(this)
 
         //拿選課列表
@@ -37,6 +41,8 @@ class ShowLessonActivity : BaseActivity(),ShowLessonContract.View {
         recycler_view.apply {
             adapter = myAdapter
             layoutManager = LinearLayoutManager(context)
+            addItemDecoration(DividerItemDecoration
+                (context,LinearLayoutManager.VERTICAL))
         }
 
         choose_btn.setOnClickListener(View.OnClickListener {
@@ -72,8 +78,8 @@ class ShowLessonActivity : BaseActivity(),ShowLessonContract.View {
         showToast(this,"拿取選課完成")
     }
 
-    override fun goToShowTeacherActivity(data:ShowLessonResponse) {
-        val intent:Intent = Intent(context, ShowTeacherActivity::class.java)
+    override fun goToShowClassRoomActivity(data:ShowLessonResponse) {
+        val intent:Intent = Intent(context, ShowClassRoomActivity::class.java)
         intent.putExtra("LessonDetail",data)
         startActivity(intent)
     }
