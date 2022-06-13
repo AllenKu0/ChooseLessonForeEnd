@@ -4,23 +4,31 @@ interface ShowLessonContract {
     interface View{
         fun setLessonList(data:ArrayList<ShowLessonResponse>)
 
-        fun getLessonProcess()
+        fun onProcess(msg:String)
 
-        fun getLessonFail()
+        fun onFail(msg:String)
 
-        fun getLessonComplete()
+        fun onComplete(msg:String)
+
+        fun dropOutLessonComplete(msg:String)
 
         fun goToShowClassRoomActivity(data:ShowLessonResponse)
+
+        fun logout()
     }
     interface Presenter{
         fun getLessonList(account:String)
+
+        fun dropOutLesson(account: String,lessonList: List<ShowLessonList>)
     }
 
     interface Adapter{
         fun setDataList(data:ArrayList<ShowLessonResponse>)
 
+        fun getChooseLesson():ArrayList<ShowLessonList>
+
         interface ViewHolder{
-            fun bind(data:ArrayList<ShowLessonResponse>, position: Int,view:ShowLessonActivity)
+            fun bind(data:ArrayList<ShowLessonList>, position: Int, view:ShowLessonActivity)
 
         }
     }

@@ -41,8 +41,6 @@ class ChooseLessonActivity : BaseActivity(),ChooseLessonContract.View {
         chooseLesson_btn.setOnClickListener(View.OnClickListener {
             if(myAdapter.getChooseLesson().size > 0){
                 presenter.chooseLesson(myAdapter.getChooseLesson())
-                chooseLessonComplete()
-                backToShowLessonActivity()
             }else{
                 showToast(this,"請選擇至少一堂課程")
             }
@@ -64,9 +62,7 @@ class ChooseLessonActivity : BaseActivity(),ChooseLessonContract.View {
     }
 
     override fun setAllLessonList(data: ArrayList<ChooseLessonResponse>) {
-        Log.e("setAllLessonList", "setAllLessonList: "+data.get(0).lessonName)
         myAdapter.setDataList(data)
-        recyclerView.adapter?.notifyDataSetChanged()
     }
 
     override fun getNotSelectProcess() {

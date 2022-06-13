@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.rp0606.BaseActivity
 import com.example.rp0606.R
+import com.example.rp0606.ShowMapActivity
 import com.example.rp0606.showLesson.ShowLessonActivity
 import com.example.rp0606.showLesson.ShowLessonResponse
 import com.example.rp0606.showOffice.ShowOfficeResponse
@@ -19,6 +21,8 @@ class ShowClassRoomActivity : BaseActivity(),ShowClassRoomContract.View {
     lateinit var classRoomPhoneNumber_txt:TextView
 
     lateinit var showTeacher_btn:Button
+    lateinit var map_btn:Button
+    lateinit var back_img: ImageView
     val presenter:ShowClassRoomPresenter = ShowClassRoomPresenter(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,9 +33,19 @@ class ShowClassRoomActivity : BaseActivity(),ShowClassRoomContract.View {
         classRoomPhoneNumber_txt = findViewById(R.id.classRoomPhoneNumber_txt)
 
         showTeacher_btn = findViewById(R.id.showTeacher_btn)
+        map_btn = findViewById(R.id.map_btn)
+        back_img = findViewById(R.id.back_img)
 
         showTeacher_btn.setOnClickListener(View.OnClickListener {
             goToShowTeacherActivity()
+        })
+
+        map_btn.setOnClickListener(View.OnClickListener {
+            goToShowMapActivity()
+        })
+
+        back_img.setOnClickListener(View.OnClickListener {
+            geToShowLessonActivity()
         })
     }
 
@@ -68,5 +82,15 @@ class ShowClassRoomActivity : BaseActivity(),ShowClassRoomContract.View {
     override fun goToShowTeacherActivity() {
         intent.setClass(this,ShowTeacherActivity::class.java)
         startActivity(intent)
+    }
+
+    override fun goToShowMapActivity() {
+        intent.setClass(this,ShowMapActivity::class.java)
+        intent.putExtra("className",classRoomName_txt.text.toString())
+        startActivity(intent)
+    }
+
+    override fun geToShowLessonActivity() {
+        finish()
     }
 }

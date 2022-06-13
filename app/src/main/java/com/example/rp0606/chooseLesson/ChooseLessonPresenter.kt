@@ -11,8 +11,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlin.collections.ArrayList
 
 class ChooseLessonPresenter(val view: ChooseLessonContract.View) : ChooseLessonContract.Presenter {
-    override fun getNotSelectLesson(account:String) {
-        Log.e("ChooseLessonPresenter", "getAllLesson: $account" )
+    override fun getNotSelectLesson(account: String) {
+        Log.e("ChooseLessonPresenter", "getNotSelectLesson: $account")
         ApiBuilder.getInstance().getAPI()?.getNotSelectLesson(account)
             ?.subscribeOn(Schedulers.io())
             ?.observeOn(AndroidSchedulers.mainThread())
@@ -75,16 +75,23 @@ class ChooseLessonPresenter(val view: ChooseLessonContract.View) : ChooseLessonC
     }
 
     override fun chooseLesson(datas: ArrayList<ChooseLessonRequest>) {
+        var isSubscribe: Boolean = false
+        var completeTimes: Int = 0
         Observable.fromIterable(datas).subscribe {
-            Log.e("ChooseLessonPresenter",
-                "chooseLesson: subscribe lesson_id: ${it.lesson_id} + account: ${it.user_name}")
+            Log.e(
+                "ChooseLessonPresenter",
+                "chooseLesson: subscribe lesson_id: ${it.lesson_id} + account: ${it.user_name}"
+            )
             ApiBuilder.getInstance().getAPI()?.chooseLesson(it)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.subscribe(object : CompletableObserver {
                     override fun onSubscribe(d: Disposable?) {
                         Log.e("ChooseLessonPresenter", "onSubscribe: ")
-                        view.chooseLessonProcess()
+                        if (!isSubscribe) {
+                            view.chooseLessonProcess()
+                            isSubscribe = true
+                        }
                     }
 
                     override fun onError(e: Throwable?) {
@@ -95,8 +102,10 @@ class ChooseLessonPresenter(val view: ChooseLessonContract.View) : ChooseLessonC
 
                     override fun onComplete() {
                         Log.e("ChooseLessonPresenter", "onComplete: ")
-
-                        view.chooseLessonComplete()
+                        completeTimes++
+                        if (completeTimes == datas.size) {
+                            view.chooseLessonComplete()
+                        }
                     }
 
                 })

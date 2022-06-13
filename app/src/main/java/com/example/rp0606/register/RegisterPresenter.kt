@@ -1,32 +1,30 @@
-package com.example.rp0606.login
+package com.example.rp0606.register
 
-import android.util.Log
 import com.example.rp0606.api.ApiBuilder
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.CompletableObserver
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class LoginPresenter(var loginView: LoginContract.View):
-    LoginContract.Presenter {
+class RegisterPresenter(val view: RegisterContract.View) : RegisterContract.Presenter {
 
-    override fun loginApi(userLogin: LoginRequest) {
-        ApiBuilder.getInstance().getAPI()?.login(userLogin)
+    override fun register(registerRequest: RegisterRequest) {
+        ApiBuilder.getInstance().getAPI()?.register(registerRequest)
             ?.subscribeOn(Schedulers.io())
             ?.observeOn(AndroidSchedulers.mainThread())
             ?.subscribe(object : CompletableObserver {
                 override fun onSubscribe(d: Disposable?) {
-                    loginView.loginProcess()
+                    view.registerProcess()
                 }
 
                 override fun onComplete() {
-                    loginView.loginSuccess()
+                    view.registerComplete()
                 }
 
                 override fun onError(e: Throwable?) {
-                    Log.e("TAG", "onError: $e")
-                    loginView.loginError()
+                    view.registerFail()
                 }
             })
+
     }
 }

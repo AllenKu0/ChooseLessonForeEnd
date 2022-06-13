@@ -6,11 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".login.LoginActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/gray"
+        app:layout_constraintBottom_toTopOf="@+id/guideline38"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="註冊"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+
+        <ImageView
+            android:id="@+id/back_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_24" />
+    </androidx.appcompat.widget.Toolbar>
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:alpha="0.5"
+        android:alpha="0.3"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline14"
@@ -57,8 +83,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="4dp"
-        android:text="帳號:"
         android:gravity="center_vertical"
+        android:text="帳號:"
         android:textColor="@color/black"
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
@@ -95,35 +121,37 @@
         app:layout_constraintGuide_percent="0.7" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/account_edt"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginLeft="5dp"
         android:ems="10"
         android:hint="ex:sxxxxxxxx"
         android:inputType="textPersonName"
-        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toEndOf="@+id/account"
         app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/password_edt"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginLeft="5dp"
         android:ems="10"
         android:hint="輸入密碼"
-        android:inputType="textPersonName"
-        android:textSize="15sp"
+        android:inputType="textPassword"
+        android:textColor="@color/black"
+        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline9"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toEndOf="@+id/password"
         app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
     <Button
-        android:id="@+id/register"
+        android:id="@+id/register_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -166,14 +194,15 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/passwordAgain_edt"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginLeft="5dp"
         android:ems="10"
         android:hint="請再輸入一次密碼"
-        android:inputType="textPersonName"
-        android:layout_marginLeft="5dp"
-        android:textSize="15sp"
+        android:inputType="textPassword"
+        android:textColor="@color/black"
+        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline13"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintHorizontal_bias="1.0"
@@ -201,5 +230,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.7" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline38"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.08" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

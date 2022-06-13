@@ -14,6 +14,7 @@ class ShowOfficeActivity : BaseActivity() ,ShowOfficeContract.View{
     lateinit var back_img : ImageView
     lateinit var office_txt :TextView
     lateinit var officePhoneNumber_txt : TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_office)

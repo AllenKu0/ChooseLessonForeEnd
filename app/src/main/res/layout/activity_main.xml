@@ -162,4 +162,14 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.50121653" />
 
+    <CheckBox
+        android:id="@+id/remember_chb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="記住我"
+        app:layout_constraintBottom_toTopOf="@+id/guideline10"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline11"
+        app:layout_constraintTop_toTopOf="@+id/guideline9" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

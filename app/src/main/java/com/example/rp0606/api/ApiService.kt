@@ -1,9 +1,11 @@
 package com.example.rp0606.api
 
-import com.example.rp0606.login.UserLoginData
+import com.example.rp0606.login.LoginRequest
 import com.example.rp0606.chooseLesson.ChooseLessonRequest
 import com.example.rp0606.chooseLesson.ChooseLessonResponse
+import com.example.rp0606.register.RegisterRequest
 import com.example.rp0606.showClassRoom.ShowClassRoomResponse
+import com.example.rp0606.showLesson.DropLessonRequest
 import com.example.rp0606.showLesson.ShowLessonResponse
 import com.example.rp0606.showOffice.ShowOfficeResponse
 import com.example.rp0606.showTeacher.ShowTeacherResponse
@@ -15,20 +17,20 @@ interface ApiService {
 
     //登入
     @POST("/api/users/login")
-    fun login(@Body userLogin: UserLoginData) : Completable
+    fun login(@Body userLogin: LoginRequest) : Completable
 
     //註冊
     @POST("/api/users/register")
-    fun register(@Body userLogin: UserLoginData) : Completable
+    fun register(@Body registerRequest: RegisterRequest) : Completable
 
     //取得已選課
     @GET("/api/course/getByUser")
     fun getAllMyLesson(@Query("account") account:String) : Observable<List<ShowLessonResponse>>
 
-    //取得所有課程
+    //取得所有未選課程
     @GET("/api/lesson/getNotSelect")
     fun getNotSelectLesson(@Query("account") account: String):Observable<List<ChooseLessonResponse>>
-
+    //取得所有課程
     @GET("/api/lesson/getAll")
     fun getAllLesson():Observable<List<ChooseLessonResponse>>
 
@@ -47,5 +49,9 @@ interface ApiService {
     //取得課程教室資訊
     @GET("/api/TeachOn/getClassRoomByLesson")
     fun getClassRoomByLesson(@Query("lessonName") lessonName:String) :Observable<ShowClassRoomResponse>
+
+    //退選
+    @POST("/api/course/delete")
+    fun dropOutLesson(@Body dropLessonRequest: DropLessonRequest) : Completable
 
 }

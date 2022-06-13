@@ -10,6 +10,6 @@ interface LoginContract {
     }
 
     interface Presenter{
-        fun loginApi(userLogin: UserLoginData)
+        fun loginApi(userLogin: LoginRequest)
     }
 }

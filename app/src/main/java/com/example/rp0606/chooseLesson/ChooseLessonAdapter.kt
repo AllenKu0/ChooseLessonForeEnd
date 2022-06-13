@@ -15,7 +15,7 @@ import com.example.rp0606.showLesson.ShowLessonAdapter
 import java.util.zip.Inflater
 
 class ChooseLessonAdapter: RecyclerView.Adapter<ChooseLessonAdapter.ChooseLessonViewHolder>() ,ChooseLessonContract.Adapter{
-    var mDaraList:ArrayList<ChooseLessonList> = ArrayList()
+    var mDataList:ArrayList<ChooseLessonList> = ArrayList()
     val loginPreference:LoginPreference = LoginPreference(MainApplication.applicationContext())
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChooseLessonViewHolder {
         return ChooseLessonViewHolder(LayoutInflater.from(parent.context)
@@ -23,16 +23,16 @@ class ChooseLessonAdapter: RecyclerView.Adapter<ChooseLessonAdapter.ChooseLesson
     }
 
     override fun onBindViewHolder(holder: ChooseLessonViewHolder, position: Int) {
-        holder.bind(mDaraList,position)
+        holder.bind(mDataList,position)
         holder.choose_cbx.setOnCheckedChangeListener { buttonView, isChecked ->
             Log.e("CheckLesson", "onBindViewHolder: position: $position isChecked: $isChecked" )
-            mDaraList.get(position).isCheck = isChecked
+            mDataList.get(position).isCheck = isChecked
 //            notifyDataSetChanged()
         }
     }
 
     override fun getItemCount(): Int {
-        return mDaraList.size
+        return mDataList.size
     }
 
     fun setDataList(datas:ArrayList<ChooseLessonResponse>){
@@ -42,7 +42,11 @@ class ChooseLessonAdapter: RecyclerView.Adapter<ChooseLessonAdapter.ChooseLesson
                 ,datas.get(i).lessonName,datas.get(i).lessonCredit,datas.get(i).lessonStatus,false)
             dataList.add(data)
         }
-        this.mDaraList = dataList
+        //升序
+        dataList.sortBy {it.lessonId}
+
+        this.mDataList = dataList
+        notifyDataSetChanged()
     }
 
     class ChooseLessonViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
@@ -57,6 +61,7 @@ class ChooseLessonAdapter: RecyclerView.Adapter<ChooseLessonAdapter.ChooseLesson
             lessonName.text = data.get(position).lessonName
             lessonCredit.text = data.get(position).lessonCredit.toString()
             lessonStatus.text = data.get(position).lessonStatus
+            choose_cbx.isChecked = data.get(position).isCheck
 //            choose_cbx.setOnCheckedChangeListener { buttonView, isChecked ->
 //                data.get(position).isCheck
 //            }
@@ -65,9 +70,9 @@ class ChooseLessonAdapter: RecyclerView.Adapter<ChooseLessonAdapter.ChooseLesson
 
     override fun getChooseLesson() :ArrayList<ChooseLessonRequest>{
         var dataList:ArrayList<ChooseLessonRequest> = ArrayList()
-        for(i in 0 until mDaraList.size){
-            if(mDaraList.get(i).isCheck){
-                val data = ChooseLessonRequest(mDaraList.get(i).lessonId,loginPreference.getAccount())
+        for(i in 0 until mDataList.size){
+            if(mDataList.get(i).isCheck){
+                val data = ChooseLessonRequest(mDataList.get(i).lessonId,loginPreference.getAccount())
                 dataList.add(data)
             }
         }

@@ -16,6 +16,10 @@ interface ShowClassRoomContract {
 
         fun goToShowTeacherActivity()
 
+        fun goToShowMapActivity()
+
+        fun geToShowLessonActivity()
+
     }
     interface Presenter{
         fun getClassRoom(lessonName:String)
