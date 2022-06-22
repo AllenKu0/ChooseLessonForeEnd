@@ -45,7 +45,7 @@ class ShowOfficeActivity : BaseActivity() ,ShowOfficeContract.View{
 
     override fun getOfficeComplete() {
         dismissProgressDialog()
-        showToast(this,"拿取辦公室完成")
+//        showToast(this,"拿取辦公室完成")
     }
 
     override fun setOfficeList(data:ShowOfficeResponse?) {

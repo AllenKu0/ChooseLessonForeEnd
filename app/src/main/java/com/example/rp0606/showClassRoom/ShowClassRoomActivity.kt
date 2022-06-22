@@ -66,7 +66,7 @@ class ShowClassRoomActivity : BaseActivity(),ShowClassRoomContract.View {
 
     override fun getClassRoomComplete() {
         dismissProgressDialog()
-        showToast(this,"拿取課程資訊完成")
+//        showToast(this,"拿取課程資訊完成")
     }
 
     override fun setClassRoom(data: ShowClassRoomResponse?) {

@@ -26,8 +26,10 @@ class ChooseLessonAdapter: RecyclerView.Adapter<ChooseLessonAdapter.ChooseLesson
         holder.bind(mDataList,position)
         holder.choose_cbx.setOnCheckedChangeListener { buttonView, isChecked ->
             Log.e("CheckLesson", "onBindViewHolder: position: $position isChecked: $isChecked" )
-            mDataList.get(position).isCheck = isChecked
+            if(position < mDataList.size) {
+                mDataList.get(position).isCheck = isChecked
 //            notifyDataSetChanged()
+            }
         }
     }
 

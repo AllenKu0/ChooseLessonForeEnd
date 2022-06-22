@@ -48,6 +48,8 @@ class ChooseLessonActivity : BaseActivity(),ChooseLessonContract.View {
 
         filter_btn.setOnClickListener(View.OnClickListener {
             presenter.getNotSelectLesson(loginPreference.getAccount())
+            filter_btn.isClickable = false
+            filter_btn.isEnabled = false
         })
 
         back_img.setOnClickListener(View.OnClickListener {
@@ -57,6 +59,8 @@ class ChooseLessonActivity : BaseActivity(),ChooseLessonContract.View {
 
     override fun onResume() {
         super.onResume()
+        filter_btn.isClickable = true
+        filter_btn.isEnabled = true
         presenter.getAllLesson()
 //        presenter.getNotSelectLesson(loginPreference.getAccount())
     }
@@ -75,7 +79,6 @@ class ChooseLessonActivity : BaseActivity(),ChooseLessonContract.View {
     }
 
     override fun getNotSelectComplete() {
-        showToast(this,"過濾衝堂完成")
         dismissProgressDialog()    }
 
     override fun getLessonProcess() {
@@ -88,7 +91,6 @@ class ChooseLessonActivity : BaseActivity(),ChooseLessonContract.View {
     }
 
     override fun getLessonComplete() {
-        showToast(this,"拿取課程完成")
         dismissProgressDialog()
     }
 
@@ -104,6 +106,7 @@ class ChooseLessonActivity : BaseActivity(),ChooseLessonContract.View {
     override fun chooseLessonComplete() {
         showToast(this,"選取課程完成")
         dismissProgressDialog()
+        finish()
     }
 
     override fun backToShowLessonActivity() {

@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -135,5 +136,13 @@ class ShowLessonActivity : BaseActivity(), ShowLessonContract.View {
             else -> Log.e(TAG, "onOptionsItemSelected: "+item.itemId)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            showToast(context,"請按右上角登出")
+            return false
+        }
+        return super.onKeyDown(keyCode, event)
     }
 }
