@@ -28,7 +28,7 @@ class LoginActivity : BaseActivity(), LoginContract.View{
 
     lateinit var bindIntent:Intent
 
-    val myServiceConnection:MyServiceConnection = MyServiceConnection()
+//    val myServiceConnection:MyServiceConnection = MyServiceConnection()
 
     init {
         Log.e("TAG", "init ")
@@ -44,10 +44,10 @@ class LoginActivity : BaseActivity(), LoginContract.View{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        bindIntent = Intent(this,MyService::class.java)
-        startService(bindIntent)
-        bindService(bindIntent,myServiceConnection, Context.BIND_AUTO_CREATE)
+        // Service綁定
+//        bindIntent = Intent(this,MyService::class.java)
+//        startService(bindIntent)
+//        bindService(bindIntent,myServiceConnection, Context.BIND_AUTO_CREATE)
 
 
         login_btn = findViewById(R.id.login_btn)
