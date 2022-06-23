@@ -1,5 +1,6 @@
 package com.example.rp0606.showTeacher
 
+import android.R.id
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -16,12 +17,16 @@ import com.example.rp0606.R
 import com.example.rp0606.showLesson.ShowLessonActivity
 import com.example.rp0606.showLesson.ShowLessonResponse
 import com.example.rp0606.showOffice.ShowOfficeActivity
+import android.R.id.message
+import android.widget.EditText
+
 
 class ShowTeacherActivity : BaseActivity(),ShowTeacherContract.View {
     lateinit var recyclerView: RecyclerView
     lateinit var back_img:ImageView
     lateinit var dial_btn:Button
     lateinit var sendMsg_btn:Button
+    lateinit var msg_edt:EditText
     var teacherPhoneNumber:String = ""
     val myAdapter:ShowTeacherAdapter= ShowTeacherAdapter(this)
     val presenter:ShowTeacherPresenter = ShowTeacherPresenter(this)
@@ -32,6 +37,7 @@ class ShowTeacherActivity : BaseActivity(),ShowTeacherContract.View {
         //鍵盤影響畫面
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
+        msg_edt = findViewById(R.id.msg_edt)
         recyclerView = findViewById(R.id.teacher_recyclerView)
         recyclerView.apply {
             adapter=myAdapter
@@ -51,7 +57,10 @@ class ShowTeacherActivity : BaseActivity(),ShowTeacherContract.View {
         })
         sendMsg_btn = findViewById(R.id.sendMsg_btn)
         sendMsg_btn.setOnClickListener(View.OnClickListener {
-
+            val smsIntent = Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+teacherPhoneNumber))
+            //sms_body 表簡訊內容，改了就讀不到
+            smsIntent.putExtra("sms_body", msg_edt.text.toString())
+            startActivity(smsIntent)
         })
     }
 

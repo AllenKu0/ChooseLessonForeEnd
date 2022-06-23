@@ -103,7 +103,7 @@ class ShowLessonActivity : BaseActivity(), ShowLessonContract.View {
 
     override fun onComplete(msg: String) {
         dismissProgressDialog()
-        showToast(this, msg)
+//        showToast(this, msg)
     }
 
     override fun dropOutLessonComplete(msg: String) {

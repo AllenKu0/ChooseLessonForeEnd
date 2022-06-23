@@ -9,6 +9,7 @@ class LoginPreference(override val context: Context):PreferenceHelper(context) {
         private const val ACCOUNT = "ACCOUNT"
         private const val PASSWORD = "PASSWORD"
         private const val REMEMBER = "REMEMBER"
+        private const val ISKNOW = "ISKNOW"
         private const val NAME = "NAME"
         private const val PHONE = "PHONE"
     }
@@ -34,4 +35,14 @@ class LoginPreference(override val context: Context):PreferenceHelper(context) {
     fun getRememberStatus():Boolean{
         return get(PreferenceHelper.Companion.Type.BOOLEAN,REMEMBER) as Boolean
     }
+
+    fun getIsHintDialogShow():Boolean{
+        return get(PreferenceHelper.Companion.Type.BOOLEAN,ISKNOW) as Boolean
+    }
+
+    fun setInHintDialogShow(isKonw:Boolean){
+        save(PreferenceHelper.Companion.Type.BOOLEAN, ISKNOW,isKonw as Object)
+    }
+
+
 }

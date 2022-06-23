@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 
@@ -62,4 +63,14 @@ open class BaseActivity : AppCompatActivity() {
             .setPositiveButton(android.R.string.yes, null)
             .show()
     }
+
+//    fun showCustomDialog(@LayoutRes layoutId:Int) {
+//        val inflater = LayoutInflater.from(MainApplication.applicationContext())
+//        val view = inflater.inflate(layoutId,null)
+//        AlertDialog.Builder(this)
+//            .setView(view)
+//            .setCancelable(false)
+//            .show()
+//
+//    }
 }

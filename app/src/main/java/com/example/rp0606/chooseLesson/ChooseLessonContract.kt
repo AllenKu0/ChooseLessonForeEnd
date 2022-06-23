@@ -1,5 +1,6 @@
 package com.example.rp0606.chooseLesson
 
+import androidx.annotation.LayoutRes
 import com.example.rp0606.showLesson.ShowLessonResponse
 
 interface ChooseLessonContract {
@@ -26,6 +27,7 @@ interface ChooseLessonContract {
 
         fun backToShowLessonActivity()
 
+        fun showHintDialog(@LayoutRes layoutId: Int)
     }
     interface Presenter{
         fun getNotSelectLesson(account:String)
