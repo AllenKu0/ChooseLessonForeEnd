@@ -7,7 +7,7 @@
     tools:context=".showClassRoom.ShowClassRoomActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
+        android:id="@+id/classRoom_toolbar"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/gray"
@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="課程資訊"
+            android:text="教室資訊"
             android:textColor="@color/black"
             android:textSize="25sp" />
 
@@ -121,15 +121,6 @@
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toTopOf="@+id/guideline36" />
 
-    <Button
-        android:id="@+id/map_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="查看地圖"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline37" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline37"

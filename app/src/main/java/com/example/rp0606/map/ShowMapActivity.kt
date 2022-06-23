@@ -1,4 +1,4 @@
-package com.example.rp0606
+package com.example.rp0606.map
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import com.example.rp0606.R
 
 class ShowMapActivity : AppCompatActivity() {
     lateinit var one_txt:TextView
@@ -49,26 +50,26 @@ class ShowMapActivity : AppCompatActivity() {
     }
 
     fun initColor() {
-        one_txt.setTextColor(ContextCompat.getColor(this,R.color.black))
-        two_txt.setTextColor(ContextCompat.getColor(this,R.color.black))
-        three_txt.setTextColor(ContextCompat.getColor(this,R.color.black))
-        four_txt.setTextColor(ContextCompat.getColor(this,R.color.black))
-        five_txt.setTextColor(ContextCompat.getColor(this,R.color.black))
-        six_txt.setTextColor(ContextCompat.getColor(this,R.color.black))
-        seven_txt.setTextColor(ContextCompat.getColor(this,R.color.black))
-        eight_txt.setTextColor(ContextCompat.getColor(this,R.color.black))
+        one_txt.setTextColor(ContextCompat.getColor(this, R.color.black))
+        two_txt.setTextColor(ContextCompat.getColor(this, R.color.black))
+        three_txt.setTextColor(ContextCompat.getColor(this, R.color.black))
+        four_txt.setTextColor(ContextCompat.getColor(this, R.color.black))
+        five_txt.setTextColor(ContextCompat.getColor(this, R.color.black))
+        six_txt.setTextColor(ContextCompat.getColor(this, R.color.black))
+        seven_txt.setTextColor(ContextCompat.getColor(this, R.color.black))
+        eight_txt.setTextColor(ContextCompat.getColor(this, R.color.black))
     }
 
     fun checkClassRoom(className:String){
         when(className[0]){
-            '1' -> one_txt.setTextColor(ContextCompat.getColor(this,R.color.high_light))
-            '2' -> two_txt.setTextColor(ContextCompat.getColor(this,R.color.high_light))
-            '3' -> three_txt.setTextColor(ContextCompat.getColor(this,R.color.high_light))
-            '4' -> four_txt.setTextColor(ContextCompat.getColor(this,R.color.high_light))
-            '5' -> five_txt.setTextColor(ContextCompat.getColor(this,R.color.high_light))
-            '6' -> six_txt.setTextColor(ContextCompat.getColor(this,R.color.high_light))
-            '7' -> seven_txt.setTextColor(ContextCompat.getColor(this,R.color.high_light))
-            '8' -> eight_txt.setTextColor(ContextCompat.getColor(this,R.color.high_light))
+            '1' -> one_txt.setTextColor(ContextCompat.getColor(this, R.color.high_light))
+            '2' -> two_txt.setTextColor(ContextCompat.getColor(this, R.color.high_light))
+            '3' -> three_txt.setTextColor(ContextCompat.getColor(this, R.color.high_light))
+            '4' -> four_txt.setTextColor(ContextCompat.getColor(this, R.color.high_light))
+            '5' -> five_txt.setTextColor(ContextCompat.getColor(this, R.color.high_light))
+            '6' -> six_txt.setTextColor(ContextCompat.getColor(this, R.color.high_light))
+            '7' -> seven_txt.setTextColor(ContextCompat.getColor(this, R.color.high_light))
+            '8' -> eight_txt.setTextColor(ContextCompat.getColor(this, R.color.high_light))
         }
     }
 }

@@ -2,14 +2,13 @@ package com.example.rp0606.chooseLesson
 
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
+import android.view.*
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +18,7 @@ import com.example.rp0606.MainApplication
 import com.example.rp0606.R
 
 class ChooseLessonActivity : BaseActivity(), ChooseLessonContract.View {
+    private val TAG = ChooseLessonActivity::class.java.name
     lateinit var recyclerView: RecyclerView
     lateinit var chooseLesson_btn: Button
     lateinit var filter_btn: Button
@@ -28,12 +28,18 @@ class ChooseLessonActivity : BaseActivity(), ChooseLessonContract.View {
     lateinit var builder: AlertDialog.Builder
     lateinit var hintDialog: AlertDialog
 
+    lateinit var toolbar:Toolbar
     val myAdapter: ChooseLessonAdapter = ChooseLessonAdapter()
     val loginPreference: LoginPreference = LoginPreference(MainApplication.applicationContext())
     val presenter: ChooseLessonPresenter = ChooseLessonPresenter(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choose_lesson2)
+
+        toolbar = findViewById(R.id.chooseLesson_toolbar)
+
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
 
         recyclerView = findViewById(R.id.choose_lesson_recyclerView)
         chooseLesson_btn = findViewById(R.id.choose_lesson_btn)
@@ -49,19 +55,28 @@ class ChooseLessonActivity : BaseActivity(), ChooseLessonContract.View {
             )
         }
 
-
+        //選課按鈕
         chooseLesson_btn.setOnClickListener(View.OnClickListener {
-            if (myAdapter.getChooseLesson().size > 0) {
-                presenter.chooseLesson(myAdapter.getChooseLesson())
+            if (getNetWorkState(MainApplication.applicationContext()) == -1) {
+                showDialog("請開啟網路")
             } else {
-                showToast(this, "請選擇至少一堂課程")
+                if (myAdapter.getChooseLesson().size > 0) {
+                    presenter.chooseLesson(myAdapter.getChooseLesson())
+                } else {
+                    showToast(this, "請選擇至少一堂課程")
+                }
             }
         })
-
+        // 過濾已選課程
         filter_btn.setOnClickListener(View.OnClickListener {
-            presenter.getNotSelectLesson(loginPreference.getAccount())
-            filter_btn.isClickable = false
-            filter_btn.isEnabled = false
+            if (getNetWorkState(MainApplication.applicationContext()) == -1) {
+                showDialog("請開啟網路")
+            } else{
+                presenter.getNotSelectLesson(loginPreference.getAccount())
+                //關閉過濾
+//                filter_btn.isClickable = false
+//                filter_btn.isEnabled = false
+            }
         })
 
         back_img.setOnClickListener(View.OnClickListener {
@@ -71,14 +86,40 @@ class ChooseLessonActivity : BaseActivity(), ChooseLessonContract.View {
 
     override fun onResume() {
         super.onResume()
-        filter_btn.isClickable = true
-        filter_btn.isEnabled = true
-        presenter.getAllLesson()
+        //開啟過濾
+//        filter_btn.isClickable = true
+//        filter_btn.isEnabled = true
+
+        //未連線顯示通知
+        if (getNetWorkState(MainApplication.applicationContext()) == -1) {
+            showDialog("請開啟網路")
+        } else {
+            presenter.getAllLesson()
+        }
         if (!loginPreference.getIsHintDialogShow()) {
             //@LayoutRes 測試
             showHintDialog(R.layout.choose_lesson_alertdialog)
         }
 //        presenter.getNotSelectLesson(loginPreference.getAccount())
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.base_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.menu_reload -> {
+                if (getNetWorkState(MainApplication.applicationContext()) == -1) {
+                    showDialog("請開啟網路")
+                } else {
+                    presenter.getAllLesson()
+                }
+            }
+            else -> Log.e(TAG, "onOptionsItemSelected: ${item.itemId}" )
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun setAllLessonList(data: ArrayList<ChooseLessonResponse>) {
@@ -137,7 +178,7 @@ class ChooseLessonActivity : BaseActivity(), ChooseLessonContract.View {
         val view = inflater.inflate(layoutId, null)
         val cancel_btn = view.findViewById<Button>(R.id.cancel_btn)
         val isKnow_chb = view.findViewById<CheckBox>(R.id.isKnow_chb)
-        val arrow_img : ImageView = view.findViewById(R.id.arrow_img)
+        val arrow_img: ImageView = view.findViewById(R.id.arrow_img)
         arrow_img.setImageDrawable(getDrawable(R.drawable.ic_baseline_call_received_24))
         builder = AlertDialog.Builder(this)
             .setView(view)
@@ -146,7 +187,7 @@ class ChooseLessonActivity : BaseActivity(), ChooseLessonContract.View {
         hintDialog = builder.create()
 
         hintDialog.window?.attributes?.x = 10
-        hintDialog.window?.attributes?.y = 450
+        hintDialog.window?.attributes?.y = 150
         hintDialog.show()
 
         cancel_btn.setOnClickListener(View.OnClickListener {

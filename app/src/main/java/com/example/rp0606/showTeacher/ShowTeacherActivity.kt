@@ -18,7 +18,12 @@ import com.example.rp0606.showLesson.ShowLessonActivity
 import com.example.rp0606.showLesson.ShowLessonResponse
 import com.example.rp0606.showOffice.ShowOfficeActivity
 import android.R.id.message
+import android.content.DialogInterface
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.EditText
+import androidx.appcompat.widget.Toolbar
+import com.example.rp0606.MainApplication
 
 
 class ShowTeacherActivity : BaseActivity(),ShowTeacherContract.View {
@@ -27,9 +32,13 @@ class ShowTeacherActivity : BaseActivity(),ShowTeacherContract.View {
     lateinit var dial_btn:Button
     lateinit var sendMsg_btn:Button
     lateinit var msg_edt:EditText
+
+    lateinit var toolbar:Toolbar
     var teacherPhoneNumber:String = ""
     val myAdapter:ShowTeacherAdapter= ShowTeacherAdapter(this)
     val presenter:ShowTeacherPresenter = ShowTeacherPresenter(this)
+
+    lateinit var onClickListener: DialogInterface.OnClickListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +46,11 @@ class ShowTeacherActivity : BaseActivity(),ShowTeacherContract.View {
         //鍵盤影響畫面
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
+        toolbar = findViewById(R.id.showTeacher_toolbar)
+
+        setSupportActionBar(toolbar)
+
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
         msg_edt = findViewById(R.id.msg_edt)
         recyclerView = findViewById(R.id.teacher_recyclerView)
         recyclerView.apply {
@@ -62,15 +76,24 @@ class ShowTeacherActivity : BaseActivity(),ShowTeacherContract.View {
             smsIntent.putExtra("sms_body", msg_edt.text.toString())
             startActivity(smsIntent)
         })
+        // 沒網路強制返回
+        onClickListener = object : DialogInterface.OnClickListener{
+            override fun onClick(p0: DialogInterface?, p1: Int) {
+                finish()
+            }
+        }
     }
 
     override fun onResume() {
         super.onResume()
         val showLessonResponse: ShowLessonResponse = intent.extras?.get("LessonDetail") as ShowLessonResponse
-
-        presenter.getTeacherList(showLessonResponse.lessonId)
-
+        if (getNetWorkState(MainApplication.applicationContext()) == -1) {
+            showOnSureDialog(onClickListener,"請開啟網路")
+        } else {
+            presenter.getTeacherList(showLessonResponse.lessonId)
+        }
     }
+
 
     override fun setTeacherList(data: ArrayList<ShowTeacherResponse>) {
         myAdapter.setDataList(data)

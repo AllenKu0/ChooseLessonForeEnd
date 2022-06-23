@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import com.example.rp0606.BaseActivity
+import com.example.rp0606.MainApplication
 import com.example.rp0606.R
 
 class RegisterActivity : BaseActivity(),RegisterContract.View {
@@ -30,14 +31,18 @@ class RegisterActivity : BaseActivity(),RegisterContract.View {
         back_img = findViewById(R.id.back_img)
 
         register_btn.setOnClickListener(View.OnClickListener {
-            if(account_edt.text.toString() != ""){
-                if(password_edt.text.toString().equals(passwordAgain_edt.text.toString())){
-                    presenter.register(RegisterRequest(account_edt.text.toString(),password_edt.text.toString()))
+            if (getNetWorkState(MainApplication.applicationContext()) == -1) {
+                showDialog("請開啟網路")
+            } else{
+                if(account_edt.text.toString() != ""){
+                    if(password_edt.text.toString().equals(passwordAgain_edt.text.toString())){
+                        presenter.register(RegisterRequest(account_edt.text.toString(),password_edt.text.toString()))
+                    }else{
+                        showDialog("兩次密碼需一致")
+                    }
                 }else{
-                    showDialog("兩次密碼需一致")
+                    showDialog("帳號不得為空")
                 }
-            }else{
-                showDialog("帳號不得為空")
             }
         })
 

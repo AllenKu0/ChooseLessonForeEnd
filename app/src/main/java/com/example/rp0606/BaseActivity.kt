@@ -1,7 +1,10 @@
 package com.example.rp0606
 
+import android.app.DownloadManager
 import android.content.Context
 import android.content.DialogInterface
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.TextView
@@ -9,6 +12,7 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.rp0606.service.MyService
 
 open class BaseActivity : AppCompatActivity() {
     lateinit var alertBuilder: AlertDialog.Builder
@@ -62,6 +66,22 @@ open class BaseActivity : AppCompatActivity() {
             .setCancelable(false)
             .setPositiveButton(android.R.string.yes, null)
             .show()
+    }
+    //檢查連線狀態
+    fun getNetWorkState(context: Context): Int {
+        val connectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetworkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
+        if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
+            if (activeNetworkInfo.getType() == (ConnectivityManager.TYPE_WIFI)) {
+                return DownloadManager.Request.NETWORK_WIFI;
+            } else if (activeNetworkInfo.getType() == (ConnectivityManager.TYPE_MOBILE)) {
+                return DownloadManager.Request.NETWORK_MOBILE;
+            }
+        } else {
+            return MyService.NETWORK_NONE;
+        }
+        return MyService.NETWORK_NONE;
     }
 
 //    fun showCustomDialog(@LayoutRes layoutId:Int) {

@@ -69,7 +69,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline18" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/showLesson_toolbar"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/gray"
@@ -125,6 +125,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="前往選課頁"
+        android:textColor="@color/black"
+        android:background="@drawable/edit_lesson_frame"
+        android:drawableRight="@drawable/ic_baseline_edit_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline20"
@@ -155,8 +158,10 @@
         android:id="@+id/deleteSelectLesson_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="退選"
+        android:textColor="@color/black"
+        android:drawableRight="@drawable/ic_baseline_delete_24"
+        android:background="@drawable/delete_selec_lesson_frame"
         app:layout_constraintBottom_toTopOf="@+id/guideline29"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

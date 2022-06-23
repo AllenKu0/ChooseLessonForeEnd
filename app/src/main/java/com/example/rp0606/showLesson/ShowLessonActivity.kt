@@ -41,7 +41,7 @@ class ShowLessonActivity : BaseActivity(), ShowLessonContract.View {
         choose_btn = findViewById(R.id.to_choose_lesson_btn)
         deleteSelectLesson_btn = findViewById(R.id.deleteSelectLesson_btn)
 
-        toolbar = findViewById(R.id.toolbar)
+        toolbar = findViewById(R.id.showLesson_toolbar)
 
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
@@ -75,7 +75,11 @@ class ShowLessonActivity : BaseActivity(), ShowLessonContract.View {
 
         onSureClickListener = object:DialogInterface.OnClickListener{
             override fun onClick(p0: DialogInterface?, p1: Int) {
-                presenter.dropOutLesson(account,myAdapter.getChooseLesson())
+                if (getNetWorkState(MainApplication.applicationContext()) == -1) {
+                    showDialog("請開啟網路")
+                } else{
+                    presenter.dropOutLesson(account,myAdapter.getChooseLesson())
+                }
             }
         }
 
@@ -84,11 +88,17 @@ class ShowLessonActivity : BaseActivity(), ShowLessonContract.View {
     override fun onResume() {
         super.onResume()
         Log.e("ShowLessonActivity", "onCreate account: $account")
-        //拿選課列表
-        presenter.getLessonList(account)
+        //未連線顯示通知
+        if (getNetWorkState(MainApplication.applicationContext()) == -1) {
+            showDialog("請開啟網路")
+        } else{
+            //拿選課列表
+            presenter.getLessonList(account)
+        }
     }
 
     override fun setLessonList(data: ArrayList<ShowLessonResponse>) {
+        //設定列表
         myAdapter.setDataList(data)
     }
 
@@ -132,12 +142,22 @@ class ShowLessonActivity : BaseActivity(), ShowLessonContract.View {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
+            //登出
             R.id.menu_logout -> logout()
+            //重載
+            R.id.menu_reload ->  {
+                if (getNetWorkState(MainApplication.applicationContext()) == -1) {
+                    showDialog("請開啟網路")
+                } else{
+                    presenter.getLessonList(account)
+                }
+            }
             else -> Log.e(TAG, "onOptionsItemSelected: "+item.itemId)
         }
         return super.onOptionsItemSelected(item)
     }
 
+    //返回鍵監聽
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if(keyCode == KeyEvent.KEYCODE_BACK){
             showToast(context,"請按右上角登出")

@@ -53,7 +53,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline31" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar3"
+        android:id="@+id/showTeacher_toolbar"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/gray"
@@ -101,23 +101,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.43" />
+        app:layout_constraintGuide_percent="0.3" />
 
     <Button
         android:id="@+id/dial_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/call_frame"
+        android:drawableRight="@drawable/ic_baseline_call_24"
         android:text="聯絡老師"
-        app:layout_constraintBottom_toTopOf="@+id/guideline47"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline23" />
+        app:layout_constraintTop_toTopOf="@+id/guideline23"
+        app:srcCompat="@drawable/ic_baseline_call_received_24" />
 
     <Button
         android:id="@+id/sendMsg_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="傳送簡訊"
+        android:textColor="@color/black"
+        android:background="@drawable/email_frame"
+        android:drawableRight="@drawable/ic_baseline_email_24"
         app:layout_constraintBottom_toTopOf="@+id/guideline51"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -186,5 +191,17 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.9" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="傳訊息給老師:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline47"
+        app:layout_constraintEnd_toStartOf="@+id/guideline50"
+        app:layout_constraintStart_toStartOf="@+id/guideline49" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

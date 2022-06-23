@@ -4,5 +4,19 @@
     <item
         android:id="@+id/menu_logout"
         android:title="登出"
-        app:showAsAction="never" />
+        android:icon="@drawable/ic_baseline_exit_to_app_24"
+        app:showAsAction="never|withText" >
+        <menu>
+            <item
+                android:id="@+id/logout"
+                android:icon="@drawable/ic_baseline_exit_to_app_24"
+                android:title=""
+                app:showAsAction="ifRoom" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_reload"
+        android:title="重載"
+        android:icon="@drawable/ic_baseline_refresh_24"
+        app:showAsAction="ifRoom"/>
 </menu>
