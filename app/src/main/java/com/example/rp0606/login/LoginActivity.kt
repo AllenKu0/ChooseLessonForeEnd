@@ -39,8 +39,6 @@ class LoginActivity : BaseActivity(), LoginContract.View{
     val loginPreference: LoginPreference = LoginPreference(MainApplication.applicationContext())
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

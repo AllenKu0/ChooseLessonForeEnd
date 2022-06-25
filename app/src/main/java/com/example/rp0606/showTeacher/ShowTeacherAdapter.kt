@@ -20,7 +20,8 @@ class ShowTeacherAdapter(val view:ShowTeacherActivity): RecyclerView.Adapter<Sho
     override fun onBindViewHolder(holder:ShowTeacherViewHolder, position: Int) {
         holder.bind(mDataList,position)
         holder.detail_btn.setOnClickListener(View.OnClickListener {
-             view.geToShowOfficeActivity(position)
+//             view.geToShowOfficeActivity(position)
+            view.getOfficeDetail(mDataList.get(position).teacher_name)
         })
     }
 

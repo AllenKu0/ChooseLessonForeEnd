@@ -11,6 +11,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline18"
         app:layout_constraintTop_toTopOf="@+id/guideline16">
+
         <TextView
             android:id="@+id/lessonSelect_txt"
             android:layout_width="0dp"
@@ -49,7 +50,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical|center"
-            android:text="狀態" />
+            android:text="修別" />
 
         <TextView
             android:id="@+id/lessonDetail_txt"
@@ -124,14 +125,14 @@
         android:id="@+id/to_choose_lesson_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="前往選課頁"
-        android:textColor="@color/black"
         android:background="@drawable/edit_lesson_frame"
         android:drawableRight="@drawable/ic_baseline_edit_24"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="前往選課頁"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/guideline29"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline20"
-        app:layout_constraintTop_toTopOf="@+id/guideline29" />
+        app:layout_constraintTop_toTopOf="@+id/guideline17" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline19"
@@ -158,14 +159,50 @@
         android:id="@+id/deleteSelectLesson_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/delete_selec_lesson_frame"
+        android:drawableRight="@drawable/ic_baseline_delete_24"
         android:text="退選"
         android:textColor="@color/black"
-        android:drawableRight="@drawable/ic_baseline_delete_24"
-        android:background="@drawable/delete_selec_lesson_frame"
         app:layout_constraintBottom_toTopOf="@+id/guideline29"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline20"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline17"
         app:layout_constraintVertical_bias="0.529" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="已選學分:"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline20"
+        app:layout_constraintTop_toTopOf="@+id/guideline29"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline53"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8946648" />
+
+    <TextView
+        android:id="@+id/credit_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline20"
+        app:layout_constraintTop_toTopOf="@+id/guideline29" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/24"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/credit_txt"
+        app:layout_constraintTop_toTopOf="@+id/guideline29" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

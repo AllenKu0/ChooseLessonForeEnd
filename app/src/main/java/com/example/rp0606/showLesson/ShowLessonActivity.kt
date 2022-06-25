@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toolbar
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +26,7 @@ class ShowLessonActivity : BaseActivity(), ShowLessonContract.View {
     lateinit var deleteSelectLesson_btn: Button
     lateinit var recycler_view: RecyclerView
     lateinit var toolbar:androidx.appcompat.widget.Toolbar
+    lateinit var credit_txt:TextView
     val context: Context = this
     lateinit var presenter: ShowLessonContract.Presenter
 
@@ -40,6 +42,8 @@ class ShowLessonActivity : BaseActivity(), ShowLessonContract.View {
 
         choose_btn = findViewById(R.id.to_choose_lesson_btn)
         deleteSelectLesson_btn = findViewById(R.id.deleteSelectLesson_btn)
+        // 學分
+        credit_txt = findViewById(R.id.credit_txt)
 
         toolbar = findViewById(R.id.showLesson_toolbar)
 
@@ -113,6 +117,11 @@ class ShowLessonActivity : BaseActivity(), ShowLessonContract.View {
 
     override fun onComplete(msg: String) {
         dismissProgressDialog()
+        credit_txt.setText(myAdapter.getCreditCount().toString());
+
+        if(myAdapter.getCreditCount() > 24){
+            showDialog("已超出選修學分，請進行退選")
+        }
 //        showToast(this, msg)
     }
 

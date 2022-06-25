@@ -27,6 +27,8 @@ interface ShowLessonContract {
 
         fun getChooseLesson():ArrayList<ShowLessonList>
 
+        fun getCreditCount():Int
+
         interface ViewHolder{
             fun bind(data:ArrayList<ShowLessonList>, position: Int, view:ShowLessonActivity)
 

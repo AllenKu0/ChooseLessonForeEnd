@@ -11,7 +11,7 @@ open class ApiBuilder {
     //192.168.1.74
     constructor() {
         val retrofit :Retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.1.74:8090")
+            .baseUrl("http://192.168.0.103:8090")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .build()

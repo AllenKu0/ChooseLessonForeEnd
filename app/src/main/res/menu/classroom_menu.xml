@@ -4,7 +4,7 @@
     <item
         android:id="@+id/show_map"
         android:title="學校地圖"
-        app:showAsAction="never"
+        app:showAsAction="ifRoom"
         android:icon="@drawable/ic_baseline_map_24" />
 
     <item

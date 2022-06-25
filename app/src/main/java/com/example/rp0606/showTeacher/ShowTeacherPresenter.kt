@@ -1,7 +1,9 @@
 package com.example.rp0606.showTeacher
 
 import android.content.Context
+import android.util.Log
 import com.example.rp0606.api.ApiBuilder
+import com.example.rp0606.showOffice.ShowOfficeResponse
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.core.Scheduler
@@ -31,6 +33,34 @@ class ShowTeacherPresenter(val view:ShowTeacherContract.View) :ShowTeacherContra
                 }
 
             })
+    }
+
+    override fun getOfficeList(teacherName: String) {
+
+            Log.e("getOfficeList", "getOfficeList: $teacherName" )
+            ApiBuilder.getInstance().getAPI()?.getOfficeByTeacher(teacherName)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe(object :Observer<ShowOfficeResponse>{
+                    override fun onSubscribe(d: Disposable?) {
+                        view.getOfficeProcess()
+                    }
+
+                    override fun onNext(t: ShowOfficeResponse?) {
+                        view.showOfficeDetail(t)
+                    }
+
+                    override fun onError(e: Throwable?) {
+                        Log.e("getOfficeList", "onError: $e" )
+                        view.getOfficeFail()
+                    }
+
+                    override fun onComplete() {
+                        view.getOfficeComplete()
+                    }
+
+                })
+
     }
 
 

@@ -60,6 +60,17 @@ class ShowLessonAdapter (val view:ShowLessonActivity): RecyclerView.Adapter<Show
         return datas
     }
 
+    override fun getCreditCount():Int {
+        var countCount:Int = 0
+        Log.e("myCount", "getCreditCount: size :"+lessonList.size)
+        for (i in 0 until lessonList.size){
+            Log.e("myCount", "getCreditCount: "+lessonList.get(i).lessonCredit)
+            countCount+=lessonList.get(i).lessonCredit
+        }
+        Log.e("myCount", "getCreditCount: countCount: "+countCount)
+        return countCount
+    }
+
     class ShowLessonViewHolder(itemView:View) :RecyclerView.ViewHolder(itemView),ShowLessonContract.Adapter.ViewHolder{
         val lessonId:TextView = itemView.findViewById(R.id.lessonId_txt)
         val lessonName:TextView = itemView.findViewById(R.id.lessonName_txt)

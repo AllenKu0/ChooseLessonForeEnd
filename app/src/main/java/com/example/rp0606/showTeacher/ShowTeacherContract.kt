@@ -1,5 +1,7 @@
 package com.example.rp0606.showTeacher
 
+import com.example.rp0606.showOffice.ShowOfficeResponse
+
 interface ShowTeacherContract {
     interface View{
         fun setTeacherList(data:ArrayList<ShowTeacherResponse>)
@@ -13,9 +15,26 @@ interface ShowTeacherContract {
         fun backToShowLessonActivity()
 
         fun geToShowOfficeActivity(position:Int)
+
+
+        //
+
+        fun getOfficeProcess()
+
+        fun getOfficeFail()
+
+        fun getOfficeComplete()
+
+        fun getOfficeDetail(teacherName:String)
+
+        fun showOfficeDetail(t: ShowOfficeResponse?)
+
+
     }
     interface Presenter{
         fun getTeacherList(lessonId:Long)
+
+        fun getOfficeList(teacherName: String)
     }
     interface Adapter{
         fun setDataList(data:ArrayList<ShowTeacherResponse>)
