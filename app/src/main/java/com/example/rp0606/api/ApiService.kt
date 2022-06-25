@@ -1,5 +1,6 @@
 package com.example.rp0606.api
 
+import com.example.rp0606.showProfile.ShowProfileRequest
 import com.example.rp0606.login.LoginRequest
 import com.example.rp0606.chooseLesson.ChooseLessonRequest
 import com.example.rp0606.chooseLesson.ChooseLessonResponse
@@ -8,6 +9,7 @@ import com.example.rp0606.showClassRoom.ShowClassRoomResponse
 import com.example.rp0606.showLesson.DropLessonRequest
 import com.example.rp0606.showLesson.ShowLessonResponse
 import com.example.rp0606.showOffice.ShowOfficeResponse
+import com.example.rp0606.showProfile.ShowProfileResponse
 import com.example.rp0606.showTeacher.ShowTeacherResponse
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
@@ -53,5 +55,16 @@ interface ApiService {
     //退選
     @POST("/api/course/delete")
     fun dropOutLesson(@Body dropLessonRequest: DropLessonRequest) : Completable
+
+    //更新個人資料
+    @PUT("api/users/updateProfile/{account}")
+    fun updateProfile(@Path("account") account: String,@Body showProfileRequest: ShowProfileRequest): Completable
+
+    //更新密碼
+    @PUT("api/users/updatePassword/{account}")
+    fun updatePassword(@Path("account") account: String,@Body showProfileRequest: ShowProfileRequest): Completable
+
+    @GET("api/users/get")
+    fun getStudentProfile(@Query("account") account:String):Observable<ShowProfileResponse>
 
 }

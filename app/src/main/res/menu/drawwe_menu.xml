@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/profile_menu"
+        android:title="個人資訊"
+        android:icon="@drawable/ic_baseline_person_24"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/passwordChange_menu"
+        android:title="修改密碼"
+        android:icon="@drawable/ic_baseline_lock_24"
+        app:showAsAction="ifRoom"/>
+</menu>
