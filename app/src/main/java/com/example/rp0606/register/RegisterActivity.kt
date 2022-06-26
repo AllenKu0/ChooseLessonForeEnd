@@ -14,6 +14,7 @@ class RegisterActivity : BaseActivity(),RegisterContract.View {
     lateinit var account_edt:EditText
     lateinit var password_edt:EditText
     lateinit var passwordAgain_edt:EditText
+    lateinit var name_edt:EditText
     lateinit var register_btn:Button
     lateinit var back_img:ImageView
     lateinit var onSureClickListener: DialogInterface.OnClickListener
@@ -25,6 +26,7 @@ class RegisterActivity : BaseActivity(),RegisterContract.View {
 
         account_edt = findViewById(R.id.account_edt)
         password_edt = findViewById(R.id.password_edt)
+        name_edt = findViewById(R.id.name_edt)
         passwordAgain_edt = findViewById(R.id.passwordAgain_edt)
 
         register_btn = findViewById(R.id.register_btn)
@@ -36,7 +38,7 @@ class RegisterActivity : BaseActivity(),RegisterContract.View {
             } else{
                 if(account_edt.text.toString() != ""){
                     if(password_edt.text.toString().equals(passwordAgain_edt.text.toString())){
-                        presenter.register(RegisterRequest(account_edt.text.toString(),password_edt.text.toString()))
+                        presenter.register(RegisterRequest(name_edt.text.toString(),account_edt.text.toString(),password_edt.text.toString()))
                     }else{
                         showDialog("兩次密碼需一致")
                     }

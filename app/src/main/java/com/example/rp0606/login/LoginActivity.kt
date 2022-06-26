@@ -55,12 +55,6 @@ class LoginActivity : BaseActivity(), LoginContract.View{
 
         remember_chb = findViewById(R.id.remember_chb)
 
-        if (loginPreference.getRememberStatus()) {
-            account_edt.setText(loginPreference.getAccount())
-            password_edt.setText(loginPreference.getPassWord())
-            remember_chb.isChecked = loginPreference.getRememberStatus()
-        }
-
         presenter = LoginPresenter(this)
         login_btn.setOnClickListener(View.OnClickListener {
             if(getNetWorkState(MainApplication.applicationContext()) == -1){
@@ -81,6 +75,16 @@ class LoginActivity : BaseActivity(), LoginContract.View{
 
         })
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (loginPreference.getRememberStatus()) {
+            account_edt.setText(loginPreference.getAccount())
+            password_edt.setText(loginPreference.getPassWord())
+            remember_chb.isChecked = loginPreference.getRememberStatus()
+        }
     }
 
     override fun loginSuccess() {

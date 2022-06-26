@@ -44,5 +44,11 @@ class LoginPreference(override val context: Context):PreferenceHelper(context) {
         save(PreferenceHelper.Companion.Type.BOOLEAN, ISKNOW,isKonw as Object)
     }
 
+    fun setName(name:String){
+        save(PreferenceHelper.Companion.Type.STRING, NAME,name as Object)
+    }
+    fun getName():String{
+        return get(PreferenceHelper.Companion.Type.STRING,NAME) as String
+    }
 
 }

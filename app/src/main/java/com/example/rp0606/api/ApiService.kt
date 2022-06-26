@@ -62,8 +62,9 @@ interface ApiService {
 
     //更新密碼
     @PUT("api/users/updatePassword/{account}")
-    fun updatePassword(@Path("account") account: String,@Body showProfileRequest: ShowProfileRequest): Completable
+    fun updatePassword(@Path("account") account: String,@Query("password")  newPassword:String): Completable
 
+    //獲得學生個人資訊
     @GET("api/users/get")
     fun getStudentProfile(@Query("account") account:String):Observable<ShowProfileResponse>
 

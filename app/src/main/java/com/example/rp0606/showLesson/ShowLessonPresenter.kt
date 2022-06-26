@@ -2,6 +2,7 @@ package com.example.rp0606.showLesson
 
 import android.util.Log
 import com.example.rp0606.api.ApiBuilder
+import com.example.rp0606.showProfile.ShowProfileResponse
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.CompletableObserver
 import io.reactivex.rxjava3.core.Observable
@@ -33,7 +34,7 @@ class ShowLessonPresenter(val view : ShowLessonContract.View):ShowLessonContract
 
                 override fun onComplete() {
                     Log.e(TAG, "onComplete: ")
-                    view.onComplete("取得課程完成")
+                    view.getLessonComplete("取得課程完成")
                 }
             })
 
@@ -71,5 +72,28 @@ class ShowLessonPresenter(val view : ShowLessonContract.View):ShowLessonContract
                      }
                  })
          }
+    }
+
+    override fun getStudentProfile(account: String) {
+        ApiBuilder.getInstance().getAPI()?.getStudentProfile(account)
+            ?.subscribeOn(Schedulers.io())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(object : Observer<ShowProfileResponse> {
+                override fun onSubscribe(d: Disposable?) {
+                    view.onProcess("拿取個人資訊")
+                }
+
+                override fun onNext(t: ShowProfileResponse?) {
+                    view.setProfile(t?.name)
+                }
+
+                override fun onError(e: Throwable?) {
+                    view.onFail("拿取個人資訊失敗")
+                }
+
+                override fun onComplete() {
+                    view.onComplete("拿取個人資訊完成")
+                }
+            })
     }
 }

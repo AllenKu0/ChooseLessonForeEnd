@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rp0606.*
+import com.example.rp0606.alertPassword.AlertPasswordActivity
 import com.example.rp0606.chooseLesson.ChooseLessonActivity
 import com.example.rp0606.showClassRoom.ShowClassRoomActivity
 import com.example.rp0606.showProfile.ShowProfileActivity
@@ -32,8 +33,10 @@ class ShowLessonActivity : BaseActivity(), ShowLessonContract.View {
     lateinit var display_nvg: NavigationView
     lateinit var drawer_layout: DrawerLayout
 
+    lateinit var name_txt:TextView
+
     val context: Context = this
-    lateinit var presenter: ShowLessonContract.Presenter
+    val presenter: ShowLessonContract.Presenter =ShowLessonPresenter(this)
 
     val loginPreference: LoginPreference = LoginPreference(MainApplication.applicationContext())
     val myAdapter: ShowLessonAdapter = ShowLessonAdapter(this)
@@ -51,6 +54,9 @@ class ShowLessonActivity : BaseActivity(), ShowLessonContract.View {
 
         drawer_layout = findViewById(R.id.drawer_layout)
         display_nvg = findViewById(R.id.display_nvg)
+
+        name_txt = display_nvg.getHeaderView(0).findViewById(R.id.name_txt)
+
         toolbar = findViewById(R.id.showLesson_toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
@@ -59,6 +65,7 @@ class ShowLessonActivity : BaseActivity(), ShowLessonContract.View {
             this, drawer_layout, toolbar,
             R.string.drawer_open, R.string.drawer_close
         )
+
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -69,13 +76,16 @@ class ShowLessonActivity : BaseActivity(), ShowLessonContract.View {
                     intent.setClass(context, ShowProfileActivity::class.java)
                     startActivity(intent)
                     return true
-                }else{
+                }else if(item.itemId == R.id.passwordChange_menu){
+                    intent.setClass(context, AlertPasswordActivity::class.java)
+                    startActivity(intent)
+                    return true
+                }
+                else{
                     return false
                 }
             }
         })
-
-        presenter = ShowLessonPresenter(this)
 
         recycler_view = findViewById(R.id.recyclerView)
         recycler_view.apply {
@@ -111,7 +121,6 @@ class ShowLessonActivity : BaseActivity(), ShowLessonContract.View {
                 }
             }
         }
-
     }
 
     override fun onResume() {
@@ -131,6 +140,10 @@ class ShowLessonActivity : BaseActivity(), ShowLessonContract.View {
         myAdapter.setDataList(data)
     }
 
+    override fun setProfile(name: String?) {
+        name_txt.text = name
+    }
+
     override fun onProcess(msg: String) {
         showProgressDialog(this, msg)
     }
@@ -142,12 +155,16 @@ class ShowLessonActivity : BaseActivity(), ShowLessonContract.View {
 
     override fun onComplete(msg: String) {
         dismissProgressDialog()
+    }
+
+    override fun getLessonComplete(msg: String) {
+        dismissProgressDialog()
         credit_txt.setText(myAdapter.getCreditCount().toString());
 
         if (myAdapter.getCreditCount() > 24) {
             showDialog("已超出選修學分，請進行退選")
         }
-//        showToast(this, msg)
+        presenter.getStudentProfile(account)
     }
 
     override fun dropOutLessonComplete(msg: String) {

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.InputType
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -85,7 +86,8 @@ class ShowProfileActivity : BaseActivity(),ShowProfileContract.View {
         account_edt.setText(data?.account)
         password_edt.setText(data?.password)
         email_edt.setText(data?.email)
-        phone_edt?.setText(data?.student_phone)
+        Log.e("電話", "setProfile: "+data?.student_phone )
+        phone_edt.setText(data?.student_phone)
 
     }
 

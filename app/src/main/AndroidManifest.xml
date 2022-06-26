@@ -17,8 +17,13 @@
         android:theme="@style/Theme.RP0606"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".alertPassword.AlertPasswordActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".showProfile.ShowProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".map.ShowMapActivity"
             android:exported="false"

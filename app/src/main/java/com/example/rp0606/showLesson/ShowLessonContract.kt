@@ -4,11 +4,15 @@ interface ShowLessonContract {
     interface View{
         fun setLessonList(data:ArrayList<ShowLessonResponse>)
 
+        fun setProfile(name:String?)
+
         fun onProcess(msg:String)
 
         fun onFail(msg:String)
 
         fun onComplete(msg:String)
+
+        fun getLessonComplete(msg:String)
 
         fun dropOutLessonComplete(msg:String)
 
@@ -20,6 +24,8 @@ interface ShowLessonContract {
         fun getLessonList(account:String)
 
         fun dropOutLesson(account: String,lessonList: List<ShowLessonList>)
+
+        fun getStudentProfile(account: String)
     }
 
     interface Adapter{
